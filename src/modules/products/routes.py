@@ -67,7 +67,7 @@ async def create_product(
 ) -> dict[str, Any]:
     image_url = None
     if image:
-        file_path = os.path.join(UPLOAD_DIR, image.filename)
+        file_path = os.path.join(UPLOAD_DIR, image.filename.lower().replace(" ","_"))
         content = await image.read()
         with open(file_path, "wb") as f:
             f.write(content)

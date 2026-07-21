@@ -21,7 +21,6 @@ class ProductRead(BaseModel):
     size: Annotated[str | None, Field(description="The size of the product")]
     quantity: Annotated[int, Field(description="The quantity of the product")]
     is_new: Annotated[bool, Field(description="Indicates if the product is new")]
-    average_rating: Annotated[float | None, Field(description="The average rating of the product", default=None)]
 
 
 class ProductCreate(ProductBase):
@@ -36,7 +35,20 @@ class ProductUpdate(BaseModel):
     quantity: Annotated[int | None, Field(ge=0, default=None)]
     category_ids: Annotated[list[str] | None, Field(default=None)]
 
+class ProductUpdateInternal(BaseModel):
+    name: Annotated[str | None, Field(min_length=2, max_length=100, default=None)]
+    description: Annotated[str | None, Field(default=None)]
+    price: Annotated[float | None, Field(gt=0, default=None)]
+    size: Annotated[str | None, Field(default=None)]
+    quantity: Annotated[int | None, Field(ge=0, default=None)]
 
-class ProductCreateInternal(ProductBase):
+
+class ProductCreateInternal(BaseModel):
     slug: str
     image_url: str | None = None
+    name: Annotated[str, Field(min_length=2, max_length=100, examples=["Gaming Mouse"])]
+    description: Annotated[str | None, Field(default=None, examples=["A high quality gaming mouse"])]
+    price: Annotated[float, Field(gt=0, examples=[49.99])]
+    size: Annotated[str | None, Field(default=None, examples=["M"])]
+    quantity: Annotated[int, Field(ge=0, default=0, examples=[10])]
+

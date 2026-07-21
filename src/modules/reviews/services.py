@@ -2,7 +2,7 @@ from .schemas import (
     ReviewUpdate,
     ReviewRead,
     ReviewCreateInternal,
-    ReviewCreate,
+    ReviewCreate, ReviewBase,
 )
 from .models import Review
 from .crud import crud_reviews
@@ -85,7 +85,7 @@ class ReviewService:
             db=db,
             object=data,
             id=review_id,
-            return_columns=list(Review.model_fields.keys()),
+            return_columns=list(ReviewRead.model_fields.keys()),
         )
         return updated_review
 

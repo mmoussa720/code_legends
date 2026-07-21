@@ -2,7 +2,7 @@ from .schemas import (
     CategoryUpdate,
     CategoryRead,
     CategoryCreateInternal,
-    CategoryCreate,
+    CategoryCreate, CategoryUpdateInternal,
 )
 from .models import Category
 from .crud import crud_categories
@@ -76,10 +76,11 @@ class CategoryService:
                     "A category with this name already exists"
                 )
             update_data["slug"] = new_slug
+        print(update_data)
         updated_category = await crud_categories.update(
             db=db,
-            object=CategoryUpdate(**update_data),
+            object=CategoryUpdateInternal(**update_data),
             slug=slug,
-            return_columns=list(Category.model_fields.keys()),
+            return_columns=list(CategoryRead.model_fields.keys()),
         )
         return updated_category

@@ -10,9 +10,9 @@ class Review(Base):
         UniqueConstraint("user_id", "product_id", name="uq_user_product_review"),
     )
     rating: Mapped[int] = mapped_column(Integer, nullable=False)
-    user_id: Mapped[str] = mapped_column(ForeignKey("user.id"), nullable=False)
+    user_id: Mapped[str] = mapped_column(ForeignKey("user.id",ondelete="CASCADE",onupdate="CASCADE"), nullable=False)
     product_id: Mapped[str] = mapped_column(
-        ForeignKey("product.id"), nullable=False
+        ForeignKey("product.id",ondelete="CASCADE",onupdate="CASCADE"), nullable=False
     )
     comment: Mapped[str | None] = mapped_column(String, default=None)
     id: Mapped[str] = mapped_column(

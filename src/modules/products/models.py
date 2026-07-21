@@ -9,10 +9,10 @@ from ...infrastructure.database.session import Base
 class ProductCategory(Base):
     __tablename__ = "product_category"
     product_id: Mapped[str] = mapped_column(
-        ForeignKey("product.id"), primary_key=True
+        ForeignKey("product.id",ondelete="CASCADE",onupdate="CASCADE"),primary_key=True
     )
     category_id: Mapped[str] = mapped_column(
-        ForeignKey("category.id"), primary_key=True
+        ForeignKey("category.id",ondelete="CASCADE",onupdate="CASCADE"), primary_key=True
     )
 
 

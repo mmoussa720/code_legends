@@ -32,6 +32,12 @@ class CategoryUpdate(BaseModel):
         Field(default=None, examples=["All electronic items"]),
     ]
 
+class CategoryUpdateInternal(CategoryUpdate):
+    slug:Annotated[
+        str | None,
+        Field(default=None, examples=["electronics"]),
+    ]
 
 class CategoryCreateInternal(CategoryBase):
     slug: str
+

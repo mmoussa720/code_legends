@@ -29,8 +29,8 @@ class TokenData(BaseModel):
 
 
 class Request(BaseModel):
-    user_name: Annotated[str, Field(description="the username of the user")]
-    password: Annotated[str, Field(description="the password of the user")]
+    user_name: Annotated[str, Field(description="the username of the user",examples=["User720"])]
+    password: Annotated[str, Field(description="the password of the user",examples=["UserPassword#123"])]
 
 
 class CreateTokenInDB(BaseModel):
